@@ -13,7 +13,7 @@ class _HomepageState extends State<Homepage> {
       body: SafeArea(
         child: Container(
           width: double.infinity,
-          padding: EdgeInsets.symmetric(
+          padding: const EdgeInsets.symmetric(
             horizontal: 24.0,
             vertical: 32.0,
           ),
@@ -24,12 +24,12 @@ class _HomepageState extends State<Homepage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
-                    margin: EdgeInsets.only(
+                    margin: const EdgeInsets.only(
                       bottom: 32.0,
                     ),
-                    child: Image(
+                    child: const Image(
                       image: AssetImage(
-                          'assets/images/logo.png'
+                          "assets/index.jpg"
                       ),
                     ),
                   ),
@@ -50,9 +50,9 @@ class _HomepageState extends State<Homepage> {
                     color: Color(0xFF7349FE),
                     borderRadius: BorderRadius.circular(20.0),
                   ),
-                  child: Image(
+                  child: const Image(
                     image: AssetImage(
-                      "assets/images/add_icon.png",
+                      "assets/index.jpg",
                     ),
                   ),
                 ),

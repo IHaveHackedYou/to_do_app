@@ -9,11 +9,11 @@ class TaskCardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      padding: EdgeInsets.symmetric(
+      padding: const EdgeInsets.symmetric(
         vertical: 32.0,
         horizontal: 24.0,
       ),
-      margin: EdgeInsets.only(
+      margin: const EdgeInsets.only(
         bottom: 20.0,
       ),
       decoration: BoxDecoration(
@@ -25,19 +25,19 @@ class TaskCardWidget extends StatelessWidget {
         children: [
           Text(
             title ?? "(Unnamed Task)",
-            style: TextStyle(
+            style: const TextStyle(
               color: Color(0xFF211551),
               fontSize: 22.0,
               fontWeight: FontWeight.bold,
             ),
           ),
           Padding(
-            padding: EdgeInsets.only(
+            padding: const EdgeInsets.only(
               top: 10.0,
             ),
             child: Text(
               desc ?? "No Description Added",
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 16.0,
                 color: Color(0xFF86829D),
                 height: 1.5,
