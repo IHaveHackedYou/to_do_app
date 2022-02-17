@@ -271,3 +271,101 @@
 //     );
 //   }
 // }
+
+import "package:flutter/material.dart";
+import 'package:to_do_app/widgets.dart';
+
+class TaskPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        body: SafeArea(
+            child: Container(
+                width: double.infinity,
+                padding: EdgeInsets.symmetric(horizontal: 24.0),
+                color: Color(0xFFF6F6F6),
+                child: Stack(children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(
+                          top: 24.0,
+                          bottom: 6.0,
+                        ),
+                        child: Row(
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                Navigator.pop(context);
+                              },
+                              child: const Padding(
+                                padding: EdgeInsets.all(24.0),
+                                child: Icon(
+                                  Icons.arrow_back,
+                                  color: Colors.black,
+                                  size: 35
+                                ),
+                              ),
+                            ),
+                            const Expanded(
+                              child: TextField(
+                                  decoration: InputDecoration(
+                                      hintText: "Enter Task Title",
+                                      border: InputBorder.none),
+                                  style: TextStyle(
+                                      fontSize: 26.0,
+                                      fontWeight: FontWeight.bold,
+                                      color: Color(0xFF211551))),
+                            )
+                          ],
+                        ),
+                      ),
+                      const TextField(
+                        decoration: InputDecoration(
+                            hintText: "Enter Description for the task...",
+                            border: InputBorder.none,
+                            contentPadding: EdgeInsets.symmetric(
+                              horizontal: 24.0,
+                            )),
+                      ),
+                      TodoWidget(isDone: true, text: "ysd"),
+                      TodoWidget(isDone: true, text: "ysd"),
+                      TodoWidget(isDone: false, text: "ysd")
+                    ],
+                  ),
+                  Positioned(
+                    bottom: 24.0,
+                    right: 24.0,
+                    child: Container(
+                      width: 60.0,
+                      height: 60.0,
+                      decoration: BoxDecoration(
+                        color: Color(0xFFFE3577),
+                        borderRadius: BorderRadius.circular(20.0),
+                      ),
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => TaskPage()));
+                        },
+                        child: Container(
+                          padding: EdgeInsets.all(8.0),
+                          child: ClipRRect(
+                              borderRadius: BorderRadius.circular(10.0),
+                              child: const AspectRatio(
+                                  aspectRatio: 1 / 1,
+                                  child: Icon(
+                                    Icons.highlight_remove_rounded,
+                                    color: Colors.white,
+                                    size: 40
+                                  ))),
+                        ),
+                      ),
+                    ),
+                  )
+                ]))));
+  }
+}

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:to_do_app/screens/taskpage.dart';
 import 'package:to_do_app/widgets.dart';
 
 class Homepage extends StatefulWidget {
@@ -26,7 +27,7 @@ class _HomepageState extends State<Homepage> {
                     margin: const EdgeInsets.only(
                         bottom: 32.0, right: 250.0, top: 32.0),
                     child: ClipRRect(
-                        borderRadius: BorderRadius.circular(20.0),
+                        borderRadius: BorderRadius.circular(10.0),
                         child: const AspectRatio(
                             aspectRatio: 1 / 1,
                             child: Image(
@@ -35,17 +36,20 @@ class _HomepageState extends State<Homepage> {
                             ))),
                   ),
                   Expanded(
-                      child: ListView(
-                    children: [
-                      TaskCardWidget(),
-                      TaskCardWidget(),
-                      TaskCardWidget(),
-                      TaskCardWidget(
-                          title: "Servus leude", desc: "Ich bin so cool"),
-                      TaskCardWidget(),
-                      TaskCardWidget(),
+                      child: ScrollConfiguration(
+                        behavior: NoGlowBehaviour(),
+                        child: ListView(
+                    children: const [
+                        TaskCardWidget(),
+                        TaskCardWidget(),
+                        TaskCardWidget(),
+                        TaskCardWidget(
+                            title: "Servus leude", desc: "Ich bin so cool"),
+                        TaskCardWidget(),
+                        TaskCardWidget(),
                     ],
-                  ))
+                  ),
+                      ))
                 ],
               ),
               Positioned(
@@ -55,19 +59,22 @@ class _HomepageState extends State<Homepage> {
                   width: 60.0,
                   height: 60.0,
                   decoration: BoxDecoration(
-                    color: Color(0xFF7349FE),
+                    gradient: const LinearGradient(
+                        colors: [Color(0xFF7349FE), Color(0xFF643FDB)],
+                        begin: Alignment(0.0, -1.0),
+                        end: Alignment(0.0, 1.0)),
                     borderRadius: BorderRadius.circular(20.0),
                   ),
-                  child: Container(
-                    padding: EdgeInsets.all(8.0),
-                    child: ClipRRect(
-                        borderRadius: BorderRadius.circular(10.0),
-                        child: const AspectRatio(
-                            aspectRatio: 1 / 1,
-                            child: Image(
-                              image: AssetImage("assets/index.jpg"),
-                              fit: BoxFit.cover,
-                            ))),
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => TaskPage()));
+                    },
+                    child: const Icon(
+                      Icons.note_add_rounded,
+                      color: Colors.white,
+                      size: 30
+                    ),
                   ),
                 ),
               )
