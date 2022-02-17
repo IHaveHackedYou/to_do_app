@@ -15,7 +15,6 @@ class _HomepageState extends State<Homepage> {
           width: double.infinity,
           padding: const EdgeInsets.symmetric(
             horizontal: 24.0,
-            vertical: 32.0,
           ),
           color: Color(0xFFF6F6F6),
           child: Stack(
@@ -25,23 +24,32 @@ class _HomepageState extends State<Homepage> {
                 children: [
                   Container(
                     margin: const EdgeInsets.only(
-                      bottom: 32.0,
-                    ),
-                    child: const Image(
-                      image: AssetImage(
-                          "assets/index.jpg"
-                      ),
-                    ),
+                        bottom: 32.0, right: 250.0, top: 32.0),
+                    child: ClipRRect(
+                        borderRadius: BorderRadius.circular(20.0),
+                        child: const AspectRatio(
+                            aspectRatio: 1 / 1,
+                            child: Image(
+                              image: AssetImage("assets/index.jpg"),
+                              fit: BoxFit.cover,
+                            ))),
                   ),
-                  TaskCardWidget(
-                    title: "Get Started!",
-                    desc: "Hello User! Welcome to WHAT_TODO app, this is a default task that you can edit or delete to start using the app.",
-                  ),
-                  TaskCardWidget(),
+                  Expanded(
+                      child: ListView(
+                    children: [
+                      TaskCardWidget(),
+                      TaskCardWidget(),
+                      TaskCardWidget(),
+                      TaskCardWidget(
+                          title: "Servus leude", desc: "Ich bin so cool"),
+                      TaskCardWidget(),
+                      TaskCardWidget(),
+                    ],
+                  ))
                 ],
               ),
               Positioned(
-                bottom: 0.0,
+                bottom: 24.0,
                 right: 0.0,
                 child: Container(
                   width: 60.0,
@@ -50,10 +58,16 @@ class _HomepageState extends State<Homepage> {
                     color: Color(0xFF7349FE),
                     borderRadius: BorderRadius.circular(20.0),
                   ),
-                  child: const Image(
-                    image: AssetImage(
-                      "assets/index.jpg",
-                    ),
+                  child: Container(
+                    padding: EdgeInsets.all(8.0),
+                    child: ClipRRect(
+                        borderRadius: BorderRadius.circular(10.0),
+                        child: const AspectRatio(
+                            aspectRatio: 1 / 1,
+                            child: Image(
+                              image: AssetImage("assets/index.jpg"),
+                              fit: BoxFit.cover,
+                            ))),
                   ),
                 ),
               )
