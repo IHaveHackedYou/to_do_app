@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import "package:flutter/material.dart";
 import 'package:google_fonts/google_fonts.dart';
 import 'package:to_do_app/helper_widgets.dart';
@@ -19,13 +17,13 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
         body: SafeArea(
             child: Container(
-      padding: EdgeInsets.only(top: 0, left: 10, right: 10, bottom: 0),
+      padding: EdgeInsets.only(top: 10, left: 10, right: 10, bottom: 0),
       child: Column(
         children: [
           Container(
             padding: EdgeInsets.all(10),
             decoration: BoxDecoration(
-                color: Color(0xF3000000),
+                color: Theme.of(context).colorScheme.secondary,
                 borderRadius: BorderRadius.circular(40)),
             child: Row(
               children: [
@@ -33,20 +31,21 @@ class HomeScreen extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.only(left: 20.0),
                   child: Text("To do app",
-                      style:
-                          TextStyle(fontSize: 30.0, color: Color(0xFFFFFFFF))),
+                      style: TextStyle(
+                          fontSize: 30.0,
+                          color: Theme.of(context).primaryColor)),
                 ),
                 Expanded(
                   child: Container(
                     alignment: Alignment.centerRight,
                     padding: EdgeInsets.all(2.0),
                     child: TextButton(
-                      onPressed: () async{
+                      onPressed: () async {
                         await _auth.signOut();
                       },
                       child: Icon(
                         Icons.logout,
-                        color: Color(0xFFFFFFFF),
+                        color: Theme.of(context).primaryColor,
                         size: 30,
                       ),
                     ),
@@ -54,6 +53,9 @@ class HomeScreen extends StatelessWidget {
                 )
               ],
             ),
+          ),
+          SizedBox(
+              height: 20
           ),
           Expanded(
             child: ListView.builder(

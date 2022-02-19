@@ -5,15 +5,15 @@ class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   // create lightweight custom user out of (Firebase)User
-  CustomUser _userFromFirebaseUser(User user) {
-    return user != null ? CustomUser(uid: user.uid) : CustomUser(uid: "null");
+  CustomUser? _userFromFirebaseUser(User? user) {
+    return user != null ? CustomUser(uid: user.uid) : null;
   }
 
   // return user when user changes
-  Stream<CustomUser> get user {
+  Stream<CustomUser?> get user {
     return _auth
         .authStateChanges()
-        .map((User? user) => _userFromFirebaseUser(user!));
+        .map((User? user) => _userFromFirebaseUser(user));
   }
 
   // sign in anonymous
@@ -21,7 +21,7 @@ class AuthService {
     try {
       UserCredential result = await _auth.signInAnonymously();
       User? user = result.user;
-      return _userFromFirebaseUser(user!);
+      return _userFromFirebaseUser(user);
     } catch (e) {
       print(e.toString());
       return null;
@@ -35,8 +35,9 @@ class AuthService {
     try {
       return await _auth.signOut();
     } catch (e) {
-      print(e.toString());
+      print("sign out error" + e.toString());
       return null;
     }
   }
 }
+

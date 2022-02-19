@@ -11,11 +11,20 @@ class TodoEntry extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         width: double.infinity,
-        padding: EdgeInsets.all(1.0),
+        margin: EdgeInsets.all(5.0),
+        decoration: BoxDecoration(
+            color: Theme.of(context).colorScheme.tertiary,
+            borderRadius: BorderRadius.circular(20.0)),
         child: Row(
           children: [
-            Checkbox(value: done, onChanged: null),
-            Text("Moin leute Trymacs hier!")
+            Checkbox(
+              value: done,
+              onChanged: null,
+              checkColor: Color(0xFFFFFFFF),
+              //fillColor: MaterialStateProperty<Color?>,
+            ),
+            Text(title,
+                style: TextStyle(color: Theme.of(context).primaryColor, fontSize: 20))
           ],
         ));
   }

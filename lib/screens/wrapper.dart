@@ -11,11 +11,13 @@ class Wrapper extends StatelessWidget {
   Widget build(BuildContext context) {
     // get data from main.dart the StreamProvider the value: AuthService().user
     // get current user state
-    final user = Provider.of<CustomUser>(context);
+    final user = Provider.of<CustomUser?>(context);
     // return either Home or Authenticate widget
-    if(user.uid == "null"){
+    if(user == null){
+      print("null");
       return Authenticate();
     }else{
+      print("reload home screen");
       return HomeScreen();
     }
   }
