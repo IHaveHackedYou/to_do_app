@@ -29,5 +29,3 @@ class TodoEntry extends StatelessWidget {
         ));
   }
 }
-
-

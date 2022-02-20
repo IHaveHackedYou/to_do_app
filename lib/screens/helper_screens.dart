@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class ErrorScreen extends StatelessWidget {
   final String errorMessage;
@@ -32,11 +33,17 @@ class ErrorScreen extends StatelessWidget {
   }
 }
 
-class LoadingScreen extends StatelessWidget {
-  const LoadingScreen({Key? key}) : super(key: key);
-
+class Loading extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Center(child: CircularProgressIndicator());
+    return Container(
+      color: Theme.of(context).scaffoldBackgroundColor,
+      child: Center(
+        child: SpinKitChasingDots(
+          color: Theme.of(context).colorScheme.secondary,
+          size: 50.0,
+        ),
+      ),
+    );
   }
 }

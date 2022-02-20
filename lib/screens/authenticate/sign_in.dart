@@ -1,6 +1,7 @@
 import "package:flutter/material.dart";
-import 'package:to_do_app/shared/shared_widgets.dart';
+import 'package:to_do_app/screens/helper_screens.dart';
 import 'package:to_do_app/services/auth.dart';
+
 
 class SignIn extends StatefulWidget {
   final Function toggleView;
@@ -14,6 +15,7 @@ class SignIn extends StatefulWidget {
 class _SignInState extends State<SignIn> {
   final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
+  bool loading = false;
 
   String email = "";
   String password = "";
@@ -21,7 +23,7 @@ class _SignInState extends State<SignIn> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return loading ? Loading() : Scaffold(
         body: SafeArea(
             child: Container(
       padding: EdgeInsets.only(top: 0, left: 10, right: 10, bottom: 0),
@@ -92,8 +94,10 @@ class _SignInState extends State<SignIn> {
                       padding: EdgeInsets.only(left: 10.0),
                       child: TextFormField(
                           decoration: InputDecoration(
-                            prefixIcon: Icon(Icons.email, color: Theme.of(context).colorScheme.primary),
-                            contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
+                            prefixIcon: Icon(Icons.email,
+                                color: Theme.of(context).colorScheme.primary),
+                            contentPadding:
+                                const EdgeInsets.fromLTRB(20, 15, 20, 15),
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(20)),
                             hintText: "Email (xxx@xxx.com)",
@@ -117,8 +121,10 @@ class _SignInState extends State<SignIn> {
                       padding: EdgeInsets.only(left: 10.0),
                       child: TextFormField(
                         decoration: InputDecoration(
-                          prefixIcon: Icon(Icons.vpn_key_rounded, color: Theme.of(context).colorScheme.primary),
-                          contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
+                          prefixIcon: Icon(Icons.vpn_key_rounded,
+                              color: Theme.of(context).colorScheme.primary),
+                          contentPadding:
+                              const EdgeInsets.fromLTRB(20, 15, 20, 15),
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(20)),
                           hintText: "Password (min. 6 char)",
@@ -143,11 +149,15 @@ class _SignInState extends State<SignIn> {
                     ElevatedButton(
                       onPressed: () async {
                         if (_formKey.currentState!.validate()) {
+                          setState(() => loading = true);
                           dynamic result = await _auth
                               .signInWithEmailAndPassword(email, password);
                           if (result == null) {
-                            setState(() => error =
-                                "COULD NOT SIGN IN WITH THESE CREDENTIALS");
+                            setState(() {
+                              error =
+                                  "COULD NOT SIGN IN WITH THESE CREDENTIALS";
+                              loading = false;
+                            });
                           }
                         }
                       },

@@ -1,5 +1,5 @@
 import "package:flutter/material.dart";
-import 'package:to_do_app/shared/shared_widgets.dart';
+import 'package:to_do_app/screens/helper_screens.dart';
 import 'package:to_do_app/services/auth.dart';
 
 class Register extends StatefulWidget {
@@ -14,6 +14,7 @@ class Register extends StatefulWidget {
 class _RegisterState extends State<Register> {
   final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
+  bool loading = false;
 
   String email = "";
   String password = "";
@@ -21,7 +22,7 @@ class _RegisterState extends State<Register> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return loading ? Loading() : Scaffold(
         body: SafeArea(
             child: Container(
       padding: EdgeInsets.only(top: 0, left: 10, right: 10, bottom: 0),
@@ -143,11 +144,15 @@ class _RegisterState extends State<Register> {
                     ElevatedButton(
                       onPressed: () async {
                         if (_formKey.currentState!.validate()) {
+                          setState(() => loading = true);
                           dynamic result = await _auth
                               .registerWithEmailAndPassword(email, password);
                           if (result == null) {
                             setState(
-                                () => error = "please supply a valid email");
+                                () {
+                                  loading = false;
+                                  error = "please supply a valid email";
+                                });
                           }
                         }
                       },

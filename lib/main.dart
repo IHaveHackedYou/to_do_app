@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:to_do_app/screens/helper_screens.dart';
 import 'package:to_do_app/screens/wrapper.dart';
 import 'package:to_do_app/services/auth.dart';
+import 'package:to_do_app/shared/shared_widgets.dart';
 
 import 'model/user.dart';
 
@@ -38,7 +39,7 @@ class MyApp extends StatelessWidget {
                     value: AuthService().user,
                     child: Wrapper());
               } else {
-                return LoadingScreen();
+                return Loading();
               }
             }));
   }
