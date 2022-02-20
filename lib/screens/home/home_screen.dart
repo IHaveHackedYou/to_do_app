@@ -1,6 +1,6 @@
 import "package:flutter/material.dart";
 import 'package:google_fonts/google_fonts.dart';
-import 'package:to_do_app/helper_widgets.dart';
+import 'package:to_do_app/shared/shared_widgets.dart';
 import 'package:to_do_app/services/auth.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -17,11 +17,12 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
         body: SafeArea(
             child: Container(
-      padding: EdgeInsets.only(top: 10, left: 10, right: 10, bottom: 0),
+      padding: EdgeInsets.only(top: 0, left: 10, right: 10, bottom: 0),
       child: Column(
         children: [
           Container(
             padding: EdgeInsets.all(10),
+            height: 70,
             decoration: BoxDecoration(
                 color: Theme.of(context).colorScheme.secondary,
                 borderRadius: BorderRadius.circular(40)),

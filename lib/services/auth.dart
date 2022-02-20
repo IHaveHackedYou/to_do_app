@@ -6,7 +6,9 @@ class AuthService {
 
   // create lightweight custom user out of (Firebase)User
   CustomUser? _userFromFirebaseUser(User? user) {
-    return user != null ? CustomUser(uid: user.uid) : null;
+    return user != null
+        ? CustomUser(uid: user.uid, name: user.displayName)
+        : null;
   }
 
   // return user when user changes
@@ -30,7 +32,30 @@ class AuthService {
 
 // sign in with email & password
 
-// register in with email & password
+  Future signInWithEmailAndPassword(String email, String password) async {
+    try {
+      UserCredential result = await _auth.signInWithEmailAndPassword(
+          email: email, password: password);
+      User? user = result.user;
+      return _userFromFirebaseUser(user);
+    } catch (e) {
+      print(e.toString());
+      return null;
+    }
+  }
+
+  Future registerWithEmailAndPassword(String email, String password) async {
+    try {
+      UserCredential result = await _auth.createUserWithEmailAndPassword(
+          email: email, password: password);
+      User? user = result.user;
+      return _userFromFirebaseUser(user);
+    } catch (e) {
+      print(e.toString());
+      return null;
+    }
+  }
+
   Future signOut() async {
     try {
       return await _auth.signOut();
@@ -40,4 +65,3 @@ class AuthService {
     }
   }
 }
-

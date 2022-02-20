@@ -50,12 +50,12 @@ class MyApp extends StatelessWidget {
       scaffoldBackgroundColor: Color(0xFF000000),
       primaryColor: Color(0xFFFFFFFF),
       colorScheme: ColorScheme.fromSwatch().copyWith(
-        primary: Color(0xFF000000),
+        primary: Color(0xFFE0E0E0),
         secondary: Color(0xFFFF8400),
         tertiary: Color(0xFF404040),
-        shadow: Color(0xFF1C1C1C),
+        shadow: Color(0xF5C5C5C),
         outline: Color(0xE6FF8400),
-        errorContainer: Color(0xFF000000)
+        errorContainer: Color(0xFFFF0000),
       )
     );
   }
