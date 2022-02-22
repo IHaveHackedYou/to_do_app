@@ -1,5 +1,7 @@
 import "package:firebase_auth/firebase_auth.dart";
+import 'package:to_do_app/model/todo_entry.dart';
 import 'package:to_do_app/model/user.dart';
+import 'package:to_do_app/services/database.dart';
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -49,6 +51,10 @@ class AuthService {
       UserCredential result = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
       User? user = result.user;
+
+      List<TodoEntry> add = List.empty(growable: true);
+      add.add(TodoEntry(title: "Servus", checked: true));
+      await DatabaseService(uid: user!.uid).updateUserData(add);
       return _userFromFirebaseUser(user);
     } catch (e) {
       print(e.toString());

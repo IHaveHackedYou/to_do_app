@@ -1,5 +1,6 @@
 import "package:flutter/material.dart";
 import 'package:google_fonts/google_fonts.dart';
+import 'package:to_do_app/screens/add_todo_screen.dart';
 import 'package:to_do_app/shared/shared_widgets.dart';
 import 'package:to_do_app/services/auth.dart';
 
@@ -15,60 +16,58 @@ class HomeScreen extends StatelessWidget {
       TodoEntry(title: "title", done: true)
     ];
     return Scaffold(
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) => AddTodoScreen()));
+          },
+          child: Icon(Icons.add, size: 35)
+        ),
         body: SafeArea(
             child: Container(
-      padding: EdgeInsets.only(top: 0, left: 10, right: 10, bottom: 0),
-      child: Column(
-        children: [
-          Container(
-            padding: EdgeInsets.all(10),
-            height: 70,
-            decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.secondary,
-                borderRadius: BorderRadius.circular(40)),
-            child: Row(
-              children: [
-                //Image(image: AssetImage("assets/index.jpg"), height: 40),
-                Padding(
-                  padding: EdgeInsets.only(left: 20.0),
-                  child: Text("To do app",
-                      style: TextStyle(
-                          fontSize: 30.0,
-                          color: Theme.of(context).primaryColor)),
-                ),
-                Expanded(
-                  child: Container(
-                    alignment: Alignment.centerRight,
-                    padding: EdgeInsets.all(2.0),
-                    child: TextButton(
-                      onPressed: () async {
-                        await _auth.signOut();
-                      },
-                      child: Icon(
-                        Icons.logout,
-                        color: Theme.of(context).primaryColor,
-                        size: 30,
-                      ),
+          padding: EdgeInsets.only(top: 0, left: 10, right: 10, bottom: 0),
+          child: Column(
+            children: [
+              Container(
+                padding: EdgeInsets.all(10),
+                height: 70,
+                decoration: BoxDecoration(
+                    color: Theme.of(context).colorScheme.secondary,
+                    borderRadius: BorderRadius.circular(40)),
+                child: Row(
+                  children: [
+                    //Image(image: AssetImage("assets/index.jpg"), height: 40),
+                    Padding(
+                      padding: EdgeInsets.only(left: 20.0),
+                      child: Text("To do app",
+                          style: TextStyle(
+                              fontSize: 30.0,
+                              color: Theme.of(context).primaryColor)),
                     ),
-                  ),
-                )
-              ],
-            ),
+                    Expanded(
+                      child: Container(
+                        alignment: Alignment.centerRight,
+                        padding: EdgeInsets.all(2.0),
+                        child: TextButton(
+                          onPressed: () async {
+                            await _auth.signOut();
+                          },
+                          child: Icon(
+                            Icons.logout,
+                            color: Theme.of(context).primaryColor,
+                            size: 30,
+                          ),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              SizedBox(height: 20),
+              Expanded(
+                child: Text("sf"),
+              ),
+            ],
           ),
-          SizedBox(
-              height: 20
-          ),
-          Expanded(
-            child: ListView.builder(
-              itemCount: entries.length,
-              itemBuilder: (BuildContext context, int index) {
-                return entries[index];
-              },
-            ),
-          ),
-          //FloatingActionButton(onPressed: () => {}, )
-        ],
-      ),
-    )));
+        )));
   }
 }
